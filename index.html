@@ -3,33 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Study & Growth Tracker</title>
+    <title>Daily Schedule</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; color: #333; margin: 20px; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #2c3e50; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        th { background-color: #3498db; color: white; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        .status-pill { padding: 5px 10px; border-radius: 15px; font-size: 0.8em; font-weight: bold; }
-        .active { background: #e74c3c; color: white; animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding: 40px; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        h2 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
+        th { background-color: #3498db; color: white; border-radius: 5px 5px 0 0; }
+        .current-row { background-color: #e8f4fd; font-weight: bold; color: #2980b9; border-left: 5px solid #3498db; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📅 My Learning Schedule</h1>
-    <p id="current-time" style="text-align: center; font-weight: bold;"></p>
-    
+    <h2>📅 My Schedule</h2>
     <table id="schedule-table">
         <thead>
             <tr>
-                <th>Time Slot</th>
+                <th>Time</th>
                 <th>Subject</th>
-                <th>Focus Area</th>
-                <th>Status</th>
             </tr>
         </thead>
         <tbody id="schedule-body">
@@ -39,38 +32,19 @@
 
 <script>
     const scheduleData = [
-        { time: "04:00 - 06:00", subject: "Java", focus: "Core Concepts & Coding", start: 4, end: 6 },
-        { time: "06:00 - 07:30", subject: "Exercise", focus: "Physical Health", start: 6, end: 7.5 },
-        { time: "08:00 - 10:30", subject: "Git", focus: "Version Control & Workflow", start: 8, end: 10.5 },
-        { time: "11:00 - 17:00", subject: "Certification/Job/Java", focus: "Career Growth", start: 11, end: 17 },
-        { time: "18:00 - 22:00", subject: "Mechanical", focus: "Material Science", start: 18, end: 22 },
-        { time: "22:00 - 23:00", subject: "Personal Development", focus: "English & Soft Skills", start: 22, end: 23 }
+        { time: "04:00 AM - 06:00 AM", subject: "Java", start: 4, end: 6 },
+        { time: "06:00 AM - 07:30 AM", subject: "Exercise", start: 6, end: 7.5 },
+        { time: "08:00 AM - 10:30 AM", subject: "Git", start: 8, end: 10.5 },
+        { time: "11:00 AM - 05:00 PM", subject: "Certification/Job/Java", start: 11, end: 17 },
+        { time: "06:00 PM - 10:00 PM", subject: "Mechanical", start: 18, end: 22 },
+        { time: "10:00 PM - 11:00 PM", subject: "Personal Development", start: 22, end: 23 }
     ];
 
     function updateTable() {
         const now = new Date();
-        const currentTime = now.getHours() + (now.getMinutes() / 60);
-        document.getElementById('current-time').innerText = "Current Time: " + now.toLocaleTimeString();
-
+        const hour = now.getHours() + (now.getMinutes() / 60);
         const tbody = document.getElementById('schedule-body');
         tbody.innerHTML = "";
 
         scheduleData.forEach(item => {
-            const isActive = currentTime >= item.start && currentTime < item.end;
-            const row = `
-                <tr>
-                    <td>${item.time}</td>
-                    <td>${item.subject}</td>
-                    <td>${item.focus}</td>
-                    <td><span class="status-pill ${isActive ? 'active' : ''}">${isActive ? 'IN PROGRESS' : 'PENDING'}</span></td>
-                </tr>
-            `;
-            tbody.innerHTML += row;
-        });
-    }
-
-    setInterval(updateTable, 1000);
-    updateTable();
-</script>
-</body>
-</html>
+            const
